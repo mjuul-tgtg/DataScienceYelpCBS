@@ -323,6 +323,23 @@ CorrelationAnalysis <- function(){
     labs(title = "Residuals vs. Fitted",
          y = "Residuals",
          x = "Fitted values")
+ 
+ # Bootstrap
+  set.seed(2020)
+  m1_boot <- Boot(m1, R=1000, metod = "case")
+  
+  plot(m1_boot)
+  
+  #LM linar regression - x and y lim to the axsis also. Another plot
+  ggplot(users, aes(x=review_count, y=useful)) + 
+    geom_ribbon(alpha =0,5)
+    geom_point(alpha = 0.3) +
+    stat_smooth(method = "lm", col = "red")+
+    xlim(0,4000)+
+    ylim(0,10000)+
+    labs(x = "Review count Per user", y = "amount of 'usefull' statements",
+         title = "Visualization of correlation ",
+         caption = "Source: Yelp dataset/ Kaggle")
 }
 
 Regression <- function(){
